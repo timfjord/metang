@@ -1,0 +1,24 @@
+{
+  "name": "metang",
+  "version": "0.0.1",
+  "authors": [
+    {
+      "name": "Tim Maslyuchenko",
+      "email": "insside@gmail.com"
+    }
+  ],
+  "main": ["dist/metang.js"],
+  "ignore": [
+    "src",
+    "test",
+    "Gruntfile.js",
+    "**/.*"
+  ],
+  "dependencies": {
+    "angular": "~1.2.21"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.21",
+    "angular-scenario": "~1.2.21"
+  }
+}
