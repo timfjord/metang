@@ -9,36 +9,58 @@
       require: '^?metangHead',
       restrict: 'A',
       scope: {
+        options: '@metang',
         property: '@',
         name: '@',
         content: '@'
       },
       controller: ["$scope", "$element", "metang", function($scope, $element, metang) {
-        $scope.getMeta = function() {
-          var data, meta, method, name, namespace, parts;
-          if (this.meta) {
-            return this.meta;
+        var tag;
+        tag = $element[0].nodeName.toLowerCase();
+        $scope.getItem = function() {
+          var data, meta, method, name, namespace, parts, titleValue;
+          if ($scope.item) {
+            return $scope.item;
           }
-          data = {};
-          method = '';
-          namespace = '';
-          name = $scope.property ? (method = 'property', $scope.property) : (method = 'meta', $scope.name);
-          parts = name.split(':');
-          if (parts[1]) {
-            namespace = parts[0];
-            name = parts[1];
+          if (tag === 'title' || $scope.options === 'title') {
+            titleValue = $element.text();
+            if ($scope.options === 'prefix' || $scope.options === 'suffix') {
+              titleValue = {};
+              titleValue[$scope.options] = $element.text();
+            }
+            $scope.item = metang.title(titleValue);
+          } else if (tag === 'meta') {
+            data = {};
+            method = '';
+            namespace = '';
+            name = $scope.property ? (method = 'property', $scope.property) : (method = 'meta', $scope.name);
+            parts = name.split(':');
+            if (parts[1]) {
+              namespace = parts[0];
+              name = parts[1];
+            }
+            data[name] = $scope.content;
+            meta = metang[method](namespace, data);
+            $scope.item = meta[0];
+          } else {
+            throw 'Not supported';
           }
-          data[name] = $scope.content;
-          meta = metang[method](namespace, data);
-          return this.meta = meta[0];
+          return $scope.item;
         };
-        $scope.$watch('meta.getValue()', function(newVal, oldVal) {
-          return $element.attr('content', newVal);
-        });
+        if (tag === 'title' || tag === 'meta') {
+          $scope.$watch('item.getValue()', function(newVal, oldVal) {
+            if (tag === 'meta') {
+              $element.attr('content', newVal);
+            }
+            if (tag === 'title') {
+              return $element.text(newVal);
+            }
+          });
+        }
       }],
       link: function(scope, element, attributes, metangHeadCtrl) {
         if (metangHeadCtrl && metangHeadCtrl.exclude) {
-          return metangHeadCtrl.exclude(scope.getMeta().uniqId());
+          return metangHeadCtrl.exclude(scope.getItem().uniqId());
         }
       }
     };
@@ -82,33 +104,6 @@
       }
     };
   }]);
-
-  angular.module('metang').directive('metangTitle', function() {
-    return {
-      require: '^?metangHead',
-      restrict: 'A',
-      scope: {
-        part: '@metangTitle'
-      },
-      controller: ["$scope", "$element", "metang", function($scope, $element, metang) {
-        var titleValue;
-        titleValue = $element.text();
-        if ($scope.part === 'prefix' || $scope.part === 'suffix') {
-          titleValue = {};
-          titleValue[$scope.part] = $element.text();
-        }
-        $scope.title = metang.title(titleValue);
-        $scope.$watch('title.getValue()', function(newVal, oldVal) {
-          return $element.text(newVal);
-        });
-      }],
-      link: function(scope, element, attributes, metangHeadCtrl) {
-        if (metangHeadCtrl && metangHeadCtrl.exclude) {
-          return metangHeadCtrl.exclude('title');
-        }
-      }
-    };
-  });
 
   angular.module('metang').factory('MetangItemAdapters', function() {
     var Adapters, Base;

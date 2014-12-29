@@ -63,7 +63,7 @@ In case you want to render title or other meta tags explicitly. You need to let 
 update it dymanicaly and also exlude it from list that renders automatically
 ```html
 <head metang-head>
-  <title metang-title="prefix">My Site</title>
+  <title metang="prefix">My Site</title>
   <meta name="description" content="Desc of my website" metang>
 </head>
 ```
