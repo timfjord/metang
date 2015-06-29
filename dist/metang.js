@@ -254,12 +254,7 @@
     };
     items = [];
     this.$get = ["$rootScope", "MetangItemAdapters", function($rootScope, MetangItemAdapters) {
-      var api, data, findItem, namespace, _ref, _ref1;
-      api = {
-        getItems: function() {
-          return items;
-        }
-      };
+      var api, data, findItem, namespace, set, _ref, _ref1;
       findItem = function(uniqId) {
         var item, _i, _len;
         for (_i = 0, _len = items.length; _i < _len; _i++) {
@@ -270,18 +265,7 @@
         }
         return false;
       };
-      api.title = function(value) {
-        var title;
-        title = findItem('title');
-        if (!title) {
-          title = new MetangItemAdapters.Title();
-          title.setValue(value);
-          items.push(title);
-        }
-        title.setValue(value);
-        return title;
-      };
-      _set = function(adapter, namespace, data) {
+      set = function(adapter, namespace, data) {
         var item, name, newItem, result, value;
         if (angular.isObject(namespace)) {
           data = namespace;
@@ -302,11 +286,28 @@
         }
         return result;
       };
+      api = {
+        getItems: function() {
+          return items;
+        }
+      };
+      api.title = function(value) {
+        var title;
+        title = findItem('title');
+        if (!title) {
+          title = new MetangItemAdapters.Title();
+          items.push(title);
+        }
+        if (value) {
+          title.setValue(value);
+        }
+        return title;
+      };
       api.meta = function(v1, v2) {
-        return _set('Meta', v1, v2);
+        return set('Meta', v1, v2);
       };
       api.property = function(v1, v2) {
-        return _set('Property', v1, v2);
+        return set('Property', v1, v2);
       };
       if (!isEmptyObject(defaults.title)) {
         api.title(defaults.title);
