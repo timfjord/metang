@@ -24,22 +24,12 @@ angular.module('metang').provider 'metang', ->
 
   items = []
   @$get = ($rootScope, MetangItemAdapters) ->
-    api = getItems: -> items
     findItem = (uniqId) ->
       for item in items
         return item if item.uniqId() == uniqId
       false
 
-    api.title = (value) ->
-      title = findItem 'title'
-      unless title
-        title = new MetangItemAdapters.Title()
-        title.setValue value
-        items.push title
-      title.setValue value
-      title
-
-    _set = (adapter, namespace, data) ->
+    set = (adapter, namespace, data) ->
       if angular.isObject(namespace)
         data = namespace
         namespace = ''
@@ -55,8 +45,20 @@ angular.module('metang').provider 'metang', ->
           result.push newItem
           items.push newItem
       result
-    api.meta = (v1, v2) -> _set 'Meta', v1, v2
-    api.property = (v1, v2) -> _set 'Property', v1, v2
+
+    api = getItems: -> items
+
+    api.title = (value) ->
+      title = findItem 'title'
+      unless title
+        title = new MetangItemAdapters.Title()
+        items.push title
+      title.setValue value if value
+      title
+
+    api.meta = (v1, v2) -> set 'Meta', v1, v2
+
+    api.property = (v1, v2) -> set 'Property', v1, v2
 
     api.title defaults.title unless isEmptyObject(defaults.title)
     api.meta namespace, data for namespace, data of defaults.meta
