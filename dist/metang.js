@@ -79,7 +79,7 @@
         $scope.getItems = function() {
           return metang.getItems();
         };
-        return $scope.isRenderItem = function(item) {
+        $scope.isRenderItem = function(item) {
           return excluded.indexOf(item.uniqId()) === -1;
         };
       }],
