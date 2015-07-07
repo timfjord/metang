@@ -9,6 +9,8 @@ angular.module('metang').directive 'metangHead', ($compile) ->
     $scope.getItems = -> metang.getItems()
 
     $scope.isRenderItem = (item) -> excluded.indexOf(item.uniqId()) == -1
+
+    return
   link: (scope, element, attributes) ->
     metaTags = $compile('<meta metang-item="item" ng-repeat="item in getItems()" ng-if="isRenderItem(item)"/>')(scope)
     element.append metaTags
