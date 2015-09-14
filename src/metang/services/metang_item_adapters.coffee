@@ -56,7 +56,7 @@ angular.module('metang').factory 'MetangItemAdapters', ->
     uniqId: -> 'title'
 
     template: ->
-      '<title ng-bing="item.getValue()"></title>'
+      '<title ng-bind="item.getValue()"></title>'
 
 
   Adapters
