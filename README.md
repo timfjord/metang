@@ -71,7 +71,6 @@ update it dymanicaly and also exlude it from list that renders automatically
 
 ## TODO
 
-- [ ] Test covarage
 - [ ] Add support for charset and http-equiv meta tags
 - [ ] Add other tags like link
 

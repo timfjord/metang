@@ -7,8 +7,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "chai": "^1.9.1",
-    "chai-jquery": "^1.2.3",
     "gulp": "^3.8.7",
     "gulp-coffee": "^2.2.0",
     "gulp-concat": "^2.4.2",
@@ -17,19 +15,19 @@
     "gulp-uglify": "^0.3.1",
     "gulp-util": "^3.0.1",
     "karma": "^0.12.22",
-    "karma-chai": "^0.1.0",
-    "karma-chai-jquery": "^1.0.0",
-    "karma-chrome-launcher": "^0.1.4",
+    "karma-coffee-preprocessor": "^1.0.0",
     "karma-jasmine": "^0.1.5",
-    "karma-jquery": "^0.1.0",
-    "karma-mocha": "^0.1.8",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "karma-sinon-chai": "^0.2.0",
-    "mocha": "^1.21.4",
-    "sinon": "^1.10.3",
-    "sinon-chai": "^2.5.0"
+    "karma-phantomjs-launcher": "^0.1.4"
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "scripts": {
+    "test": "gulp test-src && gulp test-dist-concatenated && gulp test-dist-minified"
+  },
+  "coffeelintConfig": {
+    "max_line_length": {
+      "level": "ignore"
+    }
   }
 }
