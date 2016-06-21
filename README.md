@@ -32,7 +32,7 @@ angular.module('YourModule').config(function(metangProvider) {
 angular.module('YourModule').controller('DetailsCtrl', function($scope, metang) {
    metang.title('Page title');
    metang.property('og', {description: 'Description'});
-   metang.meta(description: 'Details description');
+   metang.meta({description: 'Details description'});
 });
 ```
 
@@ -57,6 +57,7 @@ All this methods available during config phase, with the only difference that `m
 ```
 
 **metang** will automatically append all available meta tags(including title).
+
 Title output wil be [Title Prefix][Title Separator][Title][Title Separator][Title Suffix]
 
 In case you want to render title or other meta tags explicitly. You need to let **metang** knows about such tags and it will
