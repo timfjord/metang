@@ -5,6 +5,8 @@
 **metang** it is not just robotic Pokémon it's also AngularJS library to manage meta tags.
 Currently it supports only rendering meta tags with name or property atrributes and title.
 
+[![Build Status](https://travis-ci.org/timsly/metang.svg?branch=master)](https://travis-ci.org/timsly/metang)
+
 ## Installation
 1. Install **metang** via bower: `bower install metang`
 2. Include files in the app: `dist/metang.js`(`dist/metang.min.js`)
