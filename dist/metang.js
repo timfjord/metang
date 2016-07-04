@@ -207,7 +207,7 @@
       };
 
       Title.prototype.template = function() {
-        return '<title ng-bing="item.getValue()"></title>';
+        return '<title ng-bind="item.getValue()"></title>';
       };
 
       return Title;

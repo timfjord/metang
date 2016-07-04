@@ -2,6 +2,8 @@
 // Generated on Thu Aug 21 2014 10:24:39 GMT+0200 (CEST)
 
 module.exports = function(config) {
+  'use strict';
+
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -10,24 +12,23 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai-jquery', 'jquery-1.8.3', 'sinon-chai'],
+    frameworks: ['jasmine'],
+
 
     plugins: [
-      'karma-mocha',
-      'karma-chai',
-      'karma-sinon-chai',
-      'karma-chrome-launcher',
       'karma-phantomjs-launcher',
-      'karma-jquery',
-      'karma-chai-jquery'
+      'karma-jasmine',
+      'karma-coffee-preprocessor'
     ],
+
 
     // list of files / patterns to load in the browser
     files: [
       'bower/angular/angular.js',
       'bower/angular-mocks/angular-mocks.js',
-      'src/**/*.js',
-      'test/unit/**/*.js'
+      'src/metang/metang.coffee',
+      'src/**/*.coffee',
+      'test/unit/**/*.coffee'
     ],
 
 
@@ -39,6 +40,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'src/**/*.coffee': ['coffee'],
+      'test/unit/**/*.coffee': ['coffee']
     },
 
 
