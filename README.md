@@ -12,9 +12,9 @@ Currently it supports only rendering meta tags with name or property atrributes 
 2. Include files in the app: `dist/metang.js`(`dist/metang.min.js`)
 3. Include module: `metang`
 
-##Usage
+## Usage
 
-####Configuration
+#### Configuration
 
 ```js
 angular.module('YourModule').config(function(metangProvider) {
@@ -29,7 +29,8 @@ angular.module('YourModule').config(function(metangProvider) {
 });
 ```
 
-####Provider
+#### Provider
+
 ```js
 angular.module('YourModule').controller('DetailsCtrl', function($scope, metang) {
    metang.title('Page title');
@@ -52,7 +53,7 @@ Available methods:
 
 All this methods available during config phase, with the only difference that `metang.title` accepts only object argument
 
-####Template
+#### Template
 ```html
 <head metang-head>
 </head>
